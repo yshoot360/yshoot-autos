@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جدول مباريات الغد - يلا شوت الجديد - يلا شوت الجديد</title>
+    <meta name="description" content="تابع جدول مباريات اليوم والغد وجدول ترتيب الدوريات العالمية وبث مباشر حصري عبر يلا شوت الجديد (YShoot Autos) بدون تقطيع.">
+    <meta name="google-site-verification" content="f14675b287d94db2">
+    <link rel="canonical" href="https://yshoot.autos/matches-today/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f59e0b;
+            --primary-dark: #d97706;
+            --accent: #fbbf24;
+            --bg: #0c0d0f;
+            --surface: #15181e;
+            --surface-hover: rgba(255, 255, 255, 0.04);
+            --border: #272c38;
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
+            --card-radius: 12px;
+            --btn-radius: 8px;
+            --live-red: #ef4444;
+            --font-main: 'Readex Pro', -apple-system, sans-serif;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; font-family: var(--font-main); }
+        body { background:var(--bg); color:var(--text); line-height:1.6; min-height:100vh; overflow-x:hidden; direction:rtl; }
+        a { text-decoration:none; color:inherit; }
+        
+        /* HEADER */
+        header { background:var(--surface); border-bottom:1px solid var(--border); padding:0.9rem 1.5rem; position:sticky; top:0; z-index:100; backdrop-filter:blur(10px); }
+        .header-wrap { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+        .logo { display:flex; align-items:center; gap:0.75rem; }
+        .logo-icon { background:linear-gradient(135deg, var(--primary), var(--accent)); color:#fff; width:44px; height:44px; display:flex; align-items:center; justify-content:center; border-radius:12px; font-weight:900; font-size:1.3rem; box-shadow:0 4px 15px rgba(0,0,0,0.3); }
+        .logo-text { display:flex; flex-direction:column; }
+        .logo-title { font-size:1.45rem; font-weight:900; color:#fff; line-height:1.2; margin:0; }
+        .logo-sub { font-size:0.75rem; color:var(--text-dim); font-weight:600; }
+        .header-badges { display:flex; align-items:center; gap:8px; }
+        .live-count-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(239, 68, 68, 0.15); border:1px solid rgba(239, 68, 68, 0.4); color:#fca5a5; font-size:0.8rem; font-weight:800; padding:4px 12px; border-radius:99px; }
+        .badge-dot { width:7px; height:7px; background:var(--live-red); border-radius:50%; animation:pulse-dot 1.2s infinite; }
+        @keyframes pulse-dot { 0%, 100% { opacity:1; transform:scale(1); } 50% { opacity:0.3; transform:scale(0.7); } }
+        .nav-links { display:flex; gap:0.5rem; flex-wrap:wrap; }
+        .kw-link { background:rgba(255,255,255,0.04); color:var(--text); padding:0.4rem 0.9rem; border-radius:6px; font-size:0.85rem; font-weight:700; transition:0.2s; border:1px solid var(--border); }
+        .kw-link:hover { background:var(--primary); color:#fff; border-color:var(--primary); transform:translateY(-1px); }
+
+        /* HERO STRIP */
+        .hero-strip { background:linear-gradient(90deg, var(--primary-dark) 0%, var(--primary) 100%); padding:0.6rem 1rem; color:#fff; font-size:0.85rem; font-weight:700; }
+        .hero-strip-inner { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; }
+
+        .container { max-width:1200px; margin:1.5rem auto; padding:0 1rem; }
+        
+        /* HERO CARD */
+        .hero { background:linear-gradient(135deg, rgba(255,255,255,0.03), rgba(0,0,0,0.6)), var(--surface); border:1px solid var(--border); border-radius:18px; padding:2rem 1.5rem; margin-bottom:2rem; text-align:center; position:relative; overflow:hidden; }
+        .hero::before { content:''; position:absolute; top:-50%; right:-50%; width:100%; height:100%; background:radial-gradient(circle, var(--accent) 0%, transparent 60%); opacity:0.08; pointer-events:none; }
+        .hero h1 { font-size:clamp(1.5rem, 3.5vw, 2.2rem); font-weight:900; margin-bottom:0.8rem; color:#fff; line-height:1.3; }
+        .hero p { color:var(--text-dim); max-width:800px; margin:0 auto 1.5rem; font-size:0.95rem; line-height:1.7; }
+        
+        /* TABS */
+        .tabs { display:flex; justify-content:center; gap:0.6rem; margin-bottom:2rem; flex-wrap:wrap; }
+        .tab-btn { background:var(--surface); border:1px solid var(--border); color:var(--text); padding:0.65rem 1.4rem; border-radius:var(--btn-radius); font-weight:800; font-size:0.95rem; transition:0.2s; display:inline-flex; align-items:center; gap:6px; }
+        .tab-btn.active, .tab-btn:hover { background:var(--primary); border-color:var(--primary); color:#fff; box-shadow:0 4px 15px rgba(0,0,0,0.3); }
+
+        /* MATCHES GRID */
+        .section-title { font-size:1.35rem; font-weight:900; margin-bottom:1.2rem; border-right:4px solid var(--primary); padding-right:0.75rem; color:#fff; display:flex; align-items:center; justify-content:space-between; }
+        .matches-grid { display:grid; grid-template-columns: 1fr; max-width: 900px; margin: 0 auto 2.5rem; gap:1.2rem; margin-bottom:2.5rem; }
+        .match-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--card-radius); padding:1.25rem; transition:0.2s; position:relative; display:flex; flex-direction:column; justify-content:space-between; }
+        .match-card:hover { transform:translateY(-3px); border-color:var(--primary); box-shadow:0 10px 30px rgba(0,0,0,0.4); }
+        
+        /* LIVE GLOW */
+        .match-card.live { border-color:rgba(239, 68, 68, 0.6); box-shadow:0 0 20px rgba(239, 68, 68, 0.15); }
+        .match-card.live::after { content:''; position:absolute; inset:0; border-radius:var(--card-radius); box-shadow:0 0 0 1px rgba(239, 68, 68, 0.35); pointer-events:none; animation:live-ring 1.8s infinite; }
+        @keyframes live-ring { 0%, 100% { box-shadow:0 0 0 1px rgba(239, 68, 68, 0.4); } 50% { box-shadow:0 0 0 4px rgba(239, 68, 68, 0.1); } }
+
+        .match-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.1rem; font-size:0.85rem; padding-bottom:0.6rem; border-bottom:1px solid rgba(255,255,255,0.05); }
+        .m-tourn { font-weight:700; color:var(--text-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:65%; font-size:0.8rem; }
+        .m-badges { display:flex; align-items:center; gap:6px; }
+        .m-chan { font-size:0.75rem; color:var(--accent); font-weight:700; background:rgba(255,255,255,0.03); padding:2px 8px; border-radius:4px; }
+        .m-badge { padding:0.25rem 0.65rem; border-radius:99px; font-weight:800; font-size:0.75rem; display:inline-flex; align-items:center; gap:5px; }
+        .m-badge.live { background:rgba(239, 68, 68, 0.2); color:#fca5a5; border:1px solid rgba(239, 68, 68, 0.4); }
+        .m-badge.upcoming { background:rgba(255,255,255,0.05); color:var(--text-dim); border:1px solid var(--border); }
+        .m-badge.ended { background:rgba(0,0,0,0.3); color:#64748b; }
+
+        .match-teams { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.3rem; gap:0.5rem; }
+        .team { flex:1; text-align:center; display:flex; flex-direction:column; align-items:center; gap:0.5rem; }
+        .team-logo-wrap { width:56px; height:56px; border-radius:50%; background:rgba(255,255,255,0.04); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; padding:6px; }
+        .team-img { width:42px; height:42px; object-fit:contain; }
+        .team-fallback { font-size:1.6rem; }
+        .team-name { font-weight:800; font-size:0.95rem; color:#fff; max-width:115px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        
+        .match-center { flex:0 0 auto; min-width:85px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:0.3rem; }
+        .score-box { font-size:1.35rem; color:var(--accent); font-weight:900; background:rgba(0,0,0,0.4); padding:0.2rem 0.75rem; border-radius:6px; letter-spacing:2px; }
+        .match-card.not-started .score-box { display:none; }
+        .time-box { font-size:0.85rem; color:var(--text-dim); font-weight:700; }
+        .match-card.live .time-box { display:none; }
+        .rel-countdown { font-size:0.75rem; color:var(--primary); font-weight:800; }
+
+        .match-footer { border-top:1px solid rgba(255,255,255,0.05); padding-top:0.85rem; }
+        .watch-btn { display:flex; align-items:center; justify-content:center; width:100%; text-align:center; background:linear-gradient(135deg, var(--primary), var(--accent)); color:#fff; padding:0.65rem 1rem; border-radius:var(--btn-radius); font-weight:800; font-size:0.88rem; transition:0.2s; box-shadow:0 3px 12px rgba(0,0,0,0.3); }
+        .watch-btn:hover { opacity:0.92; transform:translateY(-1px); }
+        .watch-btn.live-btn { background:linear-gradient(135deg, #ef4444, #dc2626); box-shadow:0 3px 15px rgba(239, 68, 68, 0.4); }
+        .watch-btn.ended-btn { background:rgba(255,255,255,0.06); color:var(--text-dim); border:1px solid var(--border); box-shadow:none; }
+
+        /* TRUST BAR (LIKE YALLAX) */
+        .trust-bar { display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:0; background:var(--surface); border:1px solid var(--border); border-radius:14px; margin-bottom:2.5rem; overflow:hidden; }
+        .trust-stat { padding:1.2rem 1rem; text-align:center; border-left:1px solid var(--border); display:flex; flex-direction:column; gap:4px; }
+        .trust-stat:first-child { border-left:none; }
+        .trust-num { font-size:1.55rem; font-weight:900; color:var(--primary); }
+        .trust-label { font-size:0.75rem; color:var(--text-dim); font-weight:700; }
+
+        /* LEAGUES QUICK GRID */
+        .leagues-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:0.85rem; margin-bottom:2.5rem; }
+        .league-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:0.85rem 1rem; display:flex; align-items:center; gap:0.75rem; transition:0.2s; }
+        .league-card:hover { border-color:var(--primary); background:var(--surface-hover); transform:translateY(-2px); }
+        .league-icon { font-size:1.4rem; }
+        .league-info { display:flex; flex-direction:column; }
+        .league-name { font-weight:800; font-size:0.85rem; color:#fff; }
+        .league-sub { font-size:0.7rem; color:var(--text-dim); }
+
+        /* SEO ARTICLES & CONTENT BLOCK */
+        .seo-section { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:2rem 1.8rem; margin-bottom:2.5rem; }
+        .seo-section h2 { font-size:1.45rem; font-weight:900; color:#fff; margin-bottom:1rem; border-right:4px solid var(--primary); padding-right:0.75rem; }
+        .seo-section h3 { font-size:1.15rem; font-weight:800; color:var(--accent); margin:1.5rem 0 0.6rem; }
+        .seo-section p { font-size:0.95rem; line-height:2; color:#cbd5e1; margin-bottom:1rem; }
+        .seo-section a { color:var(--accent); font-weight:800; text-decoration:underline; }
+        .seo-section a:hover { color:var(--primary); }
+
+        /* ARTICLES GRID */
+        .articles-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.2rem; margin-top:1.5rem; }
+        .article-card { background:rgba(0,0,0,0.25); border:1px solid var(--border); border-radius:12px; padding:1.25rem; transition:0.2s; display:flex; flex-direction:column; justify-content:space-between; }
+        .article-card:hover { border-color:var(--primary); transform:translateY(-2px); }
+        .article-title { font-size:1.05rem; font-weight:800; color:#fff; margin-bottom:0.6rem; line-height:1.4; }
+        .article-desc { font-size:0.85rem; color:var(--text-dim); line-height:1.7; margin-bottom:1rem; }
+        .article-link { font-size:0.85rem; font-weight:800; color:var(--primary); display:inline-flex; align-items:center; gap:5px; }
+
+        /* FOOTER */
+        footer { background:var(--surface); border-top:1px solid var(--border); padding:2.5rem 1rem; text-align:center; margin-top:3.5rem; font-size:0.85rem; color:var(--text-dim); }
+        .footer-links { display:flex; justify-content:center; gap:1.5rem; margin-bottom:1.2rem; flex-wrap:wrap; }
+        .footer-links a { color:var(--accent); text-decoration:none; font-weight:700; transition:0.2s; }
+        .footer-links a:hover { color:#fff; }
+        .footer-seo-tagline { max-width:850px; margin:0 auto 1.5rem; font-size:0.8rem; line-height:1.8; color:#64748b; }
+
+        @media (max-width:640px) {
+            .header-wrap { justify-content:center; text-align:center; }
+            .nav-links { justify-content:center; }
+            .match-teams { gap:0.2rem; }
+            .team-name { max-width:90px; font-size:0.85rem; }
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://yshoot.autos/matches-today/#website",
+          "url": "https://yshoot.autos/matches-today/",
+          "name": "يلا شوت الجديد",
+          "alternateName": "YShoot Autos"
+        },
+        {
+          "@type": "SportsOrganization",
+          "name": "يلا شوت الجديد",
+          "url": "https://yshoot.autos"
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <div class="hero-strip">
+        <div class="hero-strip-inner">
+            <span>⚽ شبكة يلا شوت الجديد (YShoot Autos) | البث المباشر المعتمد مباريات اليوم 2026</span>
+            <span id="header-live-count" class="live-count-badge"><span class="badge-dot"></span> مباشر الآن</span>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-wrap">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">⚽</div>
+                <div class="logo-text">
+                    <h1 class="logo-title">يلا شوت الجديد</h1>
+                    <span class="logo-sub">YShoot Autos • بث مباشر مجاني</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="https://yshoot.autos" class="kw-link" title="يلا شوت الجديد">يلا شوت الجديد</a><a href="https://yshoot.autos" class="kw-link" title="yshoot بث مباشر">yshoot بث مباشر</a><a href="https://yshoot.autos/matches-today/" class="kw-link" title="يلا شوت الجديد مباريات اليوم">يلا شوت الجديد مباريات اليوم</a><a href="https://yshoot.autos/matches-today/" class="kw-link" title="مشاهدة مباريات اليوم yshoot">مشاهدة مباريات اليوم yshoot</a><a href="https://yshoot.autos" class="kw-link" title="بث مباشر yshoot جوال بدون تقطيع">بث مباشر yshoot جوال بدون تقطيع</a><a href="https://yshoot.autos/standings/" class="kw-link" title="جدول الترتيب" target="_blank" rel="noopener">📊 جدول الترتيب</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <h1>يلا شوت الجديد | أهم مباريات اليوم والغد وجداول الترتيب 2026</h1>
+            <p>مرحباً بك في المنصة الرياضية المعتمدة يلا شوت الجديد لمتابعة البث المباشر وجداول النتائج وترتيب الدوريات العالمية والعربية المحدثة لحظة بلحظة بدون تقطيع.</p>
+            <div class="tabs">
+                <a href="index.html" class="tab-btn ">📅 مباريات اليوم</a>
+                <a href="tomorrow.html" class="tab-btn active">⏰ مباريات الغد</a>
+                <a href="yesterday.html" class="tab-btn ">🏆 نتائج الأمس</a>
+                <a href="leagues.html" class="tab-btn ">⭐ جدول الدوريات والترتيب</a>
+            </div>
+        </div>
+
+        <h2 class="section-title"><span>جدول مباريات الغد (2026-10-27)</span></h2><div class="matches-grid"><div class="match-card upcoming style-horizontal_pro" data-kickoff="8:30 PM" data-mins="1230" data-status="upcoming">
+        <div class="match-header">
+            <span class="m-tourn">🏆 إيطاليا, الدوري الإيطالي</span>
+            <div class="m-badges">
+                
+                <span class="m-badge upcoming"><span class="badge-dot"></span><span class="badge-txt">لم تبدأ بعد</span></span>
+            </div>
+        </div>
+        <div class="match-teams">
+            <div class="team team-1">
+                <div class="team-logo-wrap"><img src="https://yalla-shoot.work/wp-content/uploads/2026/10/266.png" alt="ساسولو" class="team-img" loading="lazy" onerror="this.style.opacity='0.3'"></div>
+                <div class="team-name">ساسولو</div>
+            </div>
+            <div class="match-center">
+                <div class="score-box">0 - 0</div>
+                <div class="time-box">8:30 PM</div>
+                <div class="rel-countdown"></div>
+            </div>
+            <div class="team team-2">
+                <div class="team-logo-wrap"><img src="https://yalla-shoot.work/wp-content/uploads/2026/10/236.png" alt="لاتسيو" class="team-img" loading="lazy" onerror="this.style.opacity='0.3'"></div>
+                <div class="team-name">لاتسيو</div>
+            </div>
+        </div>
+        <div class="match-footer">
+            <a href="https://yshoot.autos/matches-today/" class="watch-btn upcoming-btn" title="بث مباشر ساسولو ضد لاتسيو مباريات اليوم على يلا شوت الجديد" target="_blank" rel="noopener">
+                ⏰ 8:30 PM — مباريات اليوم
+            </a>
+        </div>
+    </div><div class="match-card upcoming style-horizontal_pro" data-kickoff="9:00 PM" data-mins="1260" data-status="upcoming">
+        <div class="match-header">
+            <span class="m-tourn">🏆 إسبانيا, كأس ملك إسبانيا - الدور 1</span>
+            <div class="m-badges">
+                
+                <span class="m-badge upcoming"><span class="badge-dot"></span><span class="badge-txt">لم تبدأ بعد</span></span>
+            </div>
+        </div>
+        <div class="match-teams">
+            <div class="team team-1">
+                <div class="team-logo-wrap"><img src="https://yalla-shoot.work/wp-content/uploads/2026/10/9225.png" alt="سيستاو ريفر" class="team-img" loading="lazy" onerror="this.style.opacity='0.3'"></div>
+                <div class="team-name">سيستاو ريفر</div>
+            </div>
+            <div class="match-center">
+                <div class="score-box">0 - 0</div>
+                <div class="time-box">9:00 PM</div>
+                <div class="rel-countdown"></div>
+            </div>
+            <div class="team team-2">
+                <div class="team-logo-wrap"><img src="https://yalla-shoot.work/wp-content/uploads/2026/10/136.png" alt="إسبانيول" class="team-img" loading="lazy" onerror="this.style.opacity='0.3'"></div>
+                <div class="team-name">إسبانيول</div>
+            </div>
+        </div>
+        <div class="match-footer">
+            <a href="https://yshoot.autos/matches-today/" class="watch-btn upcoming-btn" title="بث مباشر سيستاو ريفر ضد إسبانيول مباريات اليوم على يلا شوت الجديد" target="_blank" rel="noopener">
+                ⏰ 9:00 PM — مباريات اليوم
+            </a>
+        </div>
+    </div><div class="match-card upcoming style-horizontal_pro" data-kickoff="9:00 PM" data-mins="1260" data-status="upcoming">
+        <div class="match-header">
+            <span class="m-tourn">🏆 إسبانيا, كأس ملك إسبانيا - الدور 1</span>
+            <div class="m-badges">
+                
+                <span class="m-badge upcoming"><span class="badge-dot"></span><span class="badge-txt">لم تبدأ بعد</span></span>
+            </div>
+        </div>
+        <div class="match-teams">
+            <div class="team team-1">
+                <div class="team-logo-wrap"><img src="https://yalla-shoot.work/wp-content/uploads/2026/10/21966.png" alt="بيناتار" class="team-img" loading="lazy" onerror="this.style.opacity='0.3'"></div>
+                <div class="team-name">بيناتار</div>
+            </div>
+            <div class="match-center">
+                <div class="score-box">0 - 0</div>
+                <div class="time-box">9:00 PM</div>
+                <div class="rel-countdown"></div>
+            </div>
+            <div class="team team-2">
+                <div class="team-logo-wrap"><img src="https://yalla-shoot.work/wp-content/uploads/2026/10/156.png" alt="إلتشي" class="team-img" loading="lazy" onerror="this.style.opacity='0.3'"></div>
+                <div class="team-name">إلتشي</div>
+            </div>
+        </div>
+        <div class="match-footer">
+            <a href="https://yshoot.autos/matches-today/" class="watch-btn upcoming-btn" title="بث مباشر بيناتار ضد إلتشي مباريات اليوم على يلا شوت الجديد" target="_blank" rel="noopener">
+                ⏰ 9:00 PM — مباريات اليوم
+            </a>
+        </div>
+    </div><div class="match-card upcoming style-horizontal_pro" data-kickoff="10:45 PM" data-mins="1365" data-status="upcoming">
+        <div class="match-header">
+            <span class="m-tourn">🏆 إيطاليا, الدوري الإيطالي</span>
+            <div class="m-badges">
+                
+                <span class="m-badge upcoming"><span class="badge-dot"></span><span class="badge-txt">لم تبدأ بعد</span></span>
+            </div>
+        </div>
+        <div class="match-teams">
+            <div class="team team-1">
+                <div class="team-logo-wrap"><img src="https://yalla-shoot.work/wp-content/uploads/2026/10/235.png" alt="تورينو" class="team-img" loading="lazy" onerror="this.style.opacity='0.3'"></div>
+                <div class="team-name">تورينو</div>
+            </div>
+            <div class="match-center">
+                <div class="score-box">0 - 0</div>
+                <div class="time-box">10:45 PM</div>
+                <div class="rel-countdown"></div>
+            </div>
+            <div class="team team-2">
+                <div class="team-logo-wrap"><img src="https://yalla-shoot.work/wp-content/uploads/2026/10/6117.png" alt="كومو" class="team-img" loading="lazy" onerror="this.style.opacity='0.3'"></div>
+                <div class="team-name">كومو</div>
+            </div>
+        </div>
+        <div class="match-footer">
+            <a href="https://yshoot.autos/matches-today/" class="watch-btn upcoming-btn" title="بث مباشر تورينو ضد كومو مباريات اليوم على يلا شوت الجديد" target="_blank" rel="noopener">
+                ⏰ 10:45 PM — مباريات اليوم
+            </a>
+        </div>
+    </div><div class="match-card upcoming style-horizontal_pro" data-kickoff="10:45 PM" data-mins="1365" data-status="upcoming">
+        <div class="match-header">
+            <span class="m-tourn">🏆 إيطاليا, الدوري الإيطالي</span>
+            <div class="m-badges">
+                
+                <span class="m-badge upcoming"><span class="badge-dot"></span><span class="badge-txt">لم تبدأ بعد</span></span>
+            </div>
+        </div>
+        <div class="match-teams">
+            <div class="team team-1">
+                <div class="team-logo-wrap"><img src="https://yalla-shoot.work/wp-content/uploads/2026/10/225.png" alt="روما" class="team-img" loading="lazy" onerror="this.style.opacity='0.3'"></div>
+                <div class="team-name">روما</div>
+            </div>
+            <div class="match-center">
+                <div class="score-box">0 - 0</div>
+                <div class="time-box">10:45 PM</div>
+                <div class="rel-countdown"></div>
+            </div>
+            <div class="team team-2">
+                <div class="team-logo-wrap"><img src="https://yalla-shoot.work/wp-content/uploads/2026/10/243.png" alt="كالياري" class="team-img" loading="lazy" onerror="this.style.opacity='0.3'"></div>
+                <div class="team-name">كالياري</div>
+            </div>
+        </div>
+        <div class="match-footer">
+            <a href="https://yshoot.autos/matches-today/" class="watch-btn upcoming-btn" title="بث مباشر روما ضد كالياري مباريات اليوم على يلا شوت الجديد" target="_blank" rel="noopener">
+                ⏰ 10:45 PM — مباريات اليوم
+            </a>
+        </div>
+    </div><div class="match-card upcoming style-horizontal_pro" data-kickoff="11:00 PM" data-mins="1380" data-status="upcoming">
+        <div class="match-header">
+            <span class="m-tourn">🏆 إسبانيا, كأس ملك إسبانيا - الدور 1</span>
+            <div class="m-badges">
+                
+                <span class="m-badge upcoming"><span class="badge-dot"></span><span class="badge-txt">لم تبدأ بعد</span></span>
+            </div>
+        </div>
+        <div class="match-teams">
+            <div class="team team-1">
+                <div class="team-logo-wrap"><img src="https://yalla-shoot.work/wp-content/uploads/2026/10/9238.png" alt="ماناكور" class="team-img" loading="lazy" onerror="this.style.opacity='0.3'"></div>
+                <div class="team-name">ماناكور</div>
+            </div>
+            <div class="match-center">
+                <div class="score-box">0 - 0</div>
+                <div class="time-box">11:00 PM</div>
+                <div class="rel-countdown"></div>
+            </div>
+            <div class="team team-2">
+                <div class="team-logo-wrap"><img src="https://yalla-shoot.work/wp-content/uploads/2026/10/133.png" alt="فياريال" class="team-img" loading="lazy" onerror="this.style.opacity='0.3'"></div>
+                <div class="team-name">فياريال</div>
+            </div>
+        </div>
+        <div class="match-footer">
+            <a href="https://yshoot.autos/matches-today/" class="watch-btn upcoming-btn" title="بث مباشر ماناكور ضد فياريال مباريات اليوم على يلا شوت الجديد" target="_blank" rel="noopener">
+                ⏰ 11:00 PM — مباريات اليوم
+            </a>
+        </div>
+    </div></div>
+
+        <!-- TRUST STATS BAR -->
+        <div class="trust-bar">
+            <div class="trust-stat"><span class="trust-num">+500</span><span class="trust-label">مباراة شهرياً</span></div>
+            <div class="trust-stat"><span class="trust-num">+50</span><span class="trust-label">دوري وبطولة</span></div>
+            <div class="trust-stat"><span class="trust-num">Full HD</span><span class="trust-label">جودة سيرفرات البث</span></div>
+            <div class="trust-stat"><span class="trust-num">24/7</span><span class="trust-label">تحديث حي لحظي</span></div>
+            <div class="trust-stat"><span class="trust-num">0$</span><span class="trust-label">مجاني تماماً</span></div>
+        </div>
+
+        <!-- QUICK LEAGUES -->
+        <h2 class="section-title"><span>أهم الدوريات والبطولات الكبرى المنقولة</span><span style="font-size:0.85rem;color:var(--text-dim);">جدول الترتيب</span></h2>
+        <div class="leagues-grid">
+        <a href="https://yshoot.autos/standings/" target="_blank" rel="noopener" class="league-card" style="border-color:var(--primary); background:rgba(255,255,255,0.06);" title="جدول ترتيب جميع الدوريات على يلا شوت الجديد">
+            <span class="league-icon">📊</span>
+            <div class="league-info">
+                <span class="league-name">جدول الترتيب العام</span>
+                <span class="league-sub">All Standings</span>
+            </div>
+        </a>
+        <a href="https://yshoot.autos/standings/?league=7" target="_blank" rel="noopener" class="league-card" title="جدول ترتيب الدوري الإنجليزي على يلا شوت الجديد"><span class="league-icon">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><div class="league-info"><span class="league-name">الدوري الإنجليزي</span><span class="league-sub">Premier League</span></div></a><a href="https://yshoot.autos/standings/?league=11" target="_blank" rel="noopener" class="league-card" title="جدول ترتيب الدوري الإسباني على يلا شوت الجديد"><span class="league-icon">🇪🇸</span><div class="league-info"><span class="league-name">الدوري الإسباني</span><span class="league-sub">La Liga</span></div></a><a href="https://yshoot.autos/standings/?league=572" target="_blank" rel="noopener" class="league-card" title="جدول ترتيب دوري أبطال أوروبا على يلا شوت الجديد"><span class="league-icon">⭐</span><div class="league-info"><span class="league-name">دوري أبطال أوروبا</span><span class="league-sub">Champions League</span></div></a><a href="https://yshoot.autos/standings/?league=25" target="_blank" rel="noopener" class="league-card" title="جدول ترتيب الدوري الألماني على يلا شوت الجديد"><span class="league-icon">🇩🇪</span><div class="league-info"><span class="league-name">الدوري الألماني</span><span class="league-sub">Bundesliga</span></div></a><a href="https://yshoot.autos/standings/?league=17" target="_blank" rel="noopener" class="league-card" title="جدول ترتيب الدوري الإيطالي على يلا شوت الجديد"><span class="league-icon">🇮🇹</span><div class="league-info"><span class="league-name">الدوري الإيطالي</span><span class="league-sub">Serie A</span></div></a><a href="https://yshoot.autos/standings/?league=560" target="_blank" rel="noopener" class="league-card" title="جدول ترتيب الدوري الجزائري على يلا شوت الجديد"><span class="league-icon">🇩🇿</span><div class="league-info"><span class="league-name">الدوري الجزائري</span><span class="league-sub">Algerian Ligue 1</span></div></a><a href="https://yshoot.autos/standings/?league=5930" target="_blank" rel="noopener" class="league-card" title="جدول ترتيب كأس العالم على يلا شوت الجديد"><span class="league-icon">🌍</span><div class="league-info"><span class="league-name">كأس العالم</span><span class="league-sub">World Cup</span></div></a><a href="https://yshoot.autos/standings/?league=557" target="_blank" rel="noopener" class="league-card" title="جدول ترتيب الدوري المغربي على يلا شوت الجديد"><span class="league-icon">🇲🇦</span><div class="league-info"><span class="league-name">الدوري المغربي</span><span class="league-sub">Botola Pro</span></div></a><a href="https://yshoot.autos/standings/?league=552" target="_blank" rel="noopener" class="league-card" title="جدول ترتيب الدوري المصري على يلا شوت الجديد"><span class="league-icon">🇪🇬</span><div class="league-info"><span class="league-name">الدوري المصري</span><span class="league-sub">Egyptian Premier</span></div></a><a href="https://yshoot.autos/standings/?league=649" target="_blank" rel="noopener" class="league-card" title="جدول ترتيب الدوري السعودي على يلا شوت الجديد"><span class="league-icon">🇸🇦</span><div class="league-info"><span class="league-name">الدوري السعودي</span><span class="league-sub">Saudi Pro League</span></div></a><a href="https://yshoot.autos/standings/?league=35" target="_blank" rel="noopener" class="league-card" title="جدول ترتيب الدوري الفرنسي على يلا شوت الجديد"><span class="league-icon">🇫🇷</span><div class="league-info"><span class="league-name">الدوري الفرنسي</span><span class="league-sub">Ligue 1</span></div></a>
+    </div>
+
+        <!-- FEATURED ARTICLES SECTION -->
+        <div class="seo-section">
+            <h2>دليل التغطية الرياضية والمقالات الحصرية عبر يلا شوت الجديد</h2>
+            <p>نحرص في يلا شوت الجديد على تقديم أرقى مستوى من التغطية المباشرة مع تحليلات فنية وتفاصيل القنوات الناقلة لكل مباراة، لنوفر لك تجربة لا مثيل لها تضمن لك متابعة فرقك المفضلة دون أي عناء.</p>
+            <div class="articles-grid">
+                <div class="article-card">
+            <h3 class="article-title">دليل متابعة مباريات اليوم بث مباشر بدون تقطيع عبر يلا شوت الجديد</h3>
+            <p class="article-desc">تعرف على أفضل طرق مشاهدة مباريات اليوم والغد بأعلى جودة سيرفرات متعددة وبدون إعلانات مزعجة عبر منصة يلا شوت الجديد.</p>
+            <a href="article-live-guide.html" class="article-link">اقرأ المقال كاملاً ←</a>
+        </div><div class="article-card">
+            <h3 class="article-title">تغطية البطولات الكبرى وجدول مباريات الغد عبر يلا شوت الجديد</h3>
+            <p class="article-desc">متابعة شاملة لترتيب وجداول مباريات دوري أبطال أوروبا، الدوري الإنجليزي، الدوري الإسباني، والدوري السعودي.</p>
+            <a href="article-tournaments-coverage.html" class="article-link">اقرأ المقال كاملاً ←</a>
+        </div><div class="article-card">
+            <h3 class="article-title">القنوات الناقلة وسيرفرات البث المباشر المشفرة عبر يلا شوت الجديد</h3>
+            <p class="article-desc">دليل القنوات الرياضية الناقلة لمباريات اليوم وكيفية مشاهدة قنوات بين سبورت بجودات متعددة مجاناً.</p>
+            <a href="article-bein-sports-channels.html" class="article-link">اقرأ المقال كاملاً ←</a>
+        </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://yshoot.autos" title="يلا شوت الجديد الرسمي" target="_blank" rel="noopener">يلا شوت الجديد الموقع الرسمي</a>
+            <a href="https://yshoot.autos/matches-today/" title="مباريات اليوم بث مباشر" target="_blank" rel="noopener">مباريات اليوم بث مباشر</a>
+            <a href="https://yshoot.autos/standings/" title="جدول ترتيب الدوريات" target="_blank" rel="noopener">جدول ترتيب الدوريات</a>
+            <a href="index.html">الرئيسية</a>
+            <a href="today.html">مباريات اليوم</a>
+            <a href="tomorrow.html">مباريات الغد</a>
+            <a href="yesterday.html">نتائج الأمس</a>
+            <a href="leagues.html">أهم البطولات</a>
+            <a href="sitemap.xml">خريطة XML</a>
+            <a href="robots.txt">robots.txt</a>
+        </div>
+        <p class="footer-seo-tagline">
+            يلا شوت • يلا لايف • كورة لايف • سير تيفي • بث مباشر مباريات اليوم • Yalla Shoot • Yalla Live • Koora Live • جدول مباريات اليوم والغد وترتيب الدوريات بتحديث لحظي بدون تقطيع.
+        </p>
+        <p>جميع الحقوق محفوظة © 2026 - شبكة يلا شوت الجديد (YShoot Autos)</p>
+    </footer>
+
+    
+<script>
+(function() {
+    'use strict';
+    function updateMatchesClock() {
+        var now = new Date();
+        var currentMinutes = now.getHours() * 60 + now.getMinutes();
+        var liveCount = 0;
+        var cards = document.querySelectorAll('.match-card');
+
+        cards.forEach(function(card) {
+            var rawMins = card.getAttribute('data-mins');
+            var rawStatus = card.getAttribute('data-status');
+            var badgeTxt = card.querySelector('.badge-txt');
+            var relBox = card.querySelector('.rel-countdown');
+            var watchBtn = card.querySelector('.watch-btn');
+
+            if (!rawMins || isNaN(rawMins)) return;
+            var matchMins = parseInt(rawMins, 10);
+            var diff = matchMins - currentMinutes;
+
+            // If match is within playing window (0 to 115 minutes from kickoff)
+            if (diff <= 0 && diff >= -115) {
+                liveCount++;
+                card.classList.remove('upcoming', 'ended');
+                card.classList.add('live');
+                var badge = card.querySelector('.m-badge');
+                if (badge) {
+                    badge.className = 'm-badge live';
+                    if (badgeTxt) badgeTxt.textContent = '🔴 جارية الآن - مباشر';
+                }
+                if (watchBtn) {
+                    watchBtn.className = 'watch-btn live-btn';
+                    watchBtn.textContent = '🔴 شاهد البث المباشر الآن';
+                }
+                if (relBox) relBox.textContent = 'مباشر الآن';
+            } else if (diff < -115) {
+                // Match ended
+                card.classList.remove('upcoming', 'live');
+                card.classList.add('ended');
+                var badge = card.querySelector('.m-badge');
+                if (badge) {
+                    badge.className = 'm-badge ended';
+                    if (badgeTxt) badgeTxt.textContent = 'انتهت';
+                }
+                if (watchBtn) {
+                    watchBtn.className = 'watch-btn ended-btn';
+                    watchBtn.textContent = '🎬 ملخص وأهداف المباراة';
+                }
+                if (relBox) relBox.textContent = '';
+            } else if (diff > 0 && diff <= 120) {
+                // Upcoming countdown
+                var h = Math.floor(diff / 60);
+                var m = diff % 60;
+                var countdownText = (h > 0) ? ('بعد ' + h + ' س و ' + m + ' د') : ('بعد ' + m + ' دقيقة');
+                if (relBox) relBox.textContent = countdownText;
+            }
+        });
+
+        // Update Header Live Count
+        var headerLiveBadge = document.getElementById('header-live-count');
+        if (headerLiveBadge) {
+            if (liveCount > 0) {
+                headerLiveBadge.innerHTML = '<span class="badge-dot"></span> ' + liveCount + ' مباراة جارية الآن';
+                headerLiveBadge.style.display = 'inline-flex';
+            } else {
+                headerLiveBadge.innerHTML = '<span class="badge-dot" style="background:#22c55e;"></span> تغطية حصرية';
+            }
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', updateMatchesClock);
+    } else {
+        updateMatchesClock();
+    }
+    // Refresh check every 60 seconds
+    setInterval(updateMatchesClock, 60000);
+})();
+</script>
+
+</body>
+</html>
